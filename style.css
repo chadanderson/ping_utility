@@ -1,0 +1,41 @@
+/*
+
+Stylesheet - Ping Utility
+
+
+
+*/
+
+.wrapper {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+table {
+	width: 100%;
+	text-align: left;
+}
+
+td {
+	width: 15%;
+	padding: 3px 6px;
+	border: 1px solid #ebebeb;
+}
+
+.main-nav li {
+	border-right: 1px solid #ccc;
+	display: inline-block;
+	padding: 0 15px 0 15px;
+}
+
+.main-nav li:last-child {
+	border-right: none;
+}
+
+.success {
+	color: green;
+}
+
+.failure {
+	color: red;
+}
