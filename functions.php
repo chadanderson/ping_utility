@@ -13,7 +13,7 @@
         $result = null;
 
         // ping the ip address of the device
-        exec("ping -c 1" . $ip, $output, $result);
+        exec("ping -c 1 " . $ip, $output, $result);
 
         if ($result == 0) {
             $status = 'Connected';
@@ -37,7 +37,7 @@
         $result = null;
 
         // ping the ip address of the device
-        exec("ping -c 1" . $ip, $output, $result);
+        exec("ping -c 1 " . $ip, $output, $result);
 
         if ($result == 0) {
             $status = '<span class="success">Connected</span>';
