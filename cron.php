@@ -4,13 +4,15 @@ include('functions.php');
 
 $rows = get_devices( $host, $database, $username, $password );
 
-// check if log file exists, if it doesn't, create it
+// create log file
 if ( !file_exists('logs/status_report_log.csv') ) {
 		$handle = fopen('logs/status_report_log.csv', 'a');
         
         $data = array( 'Date', 'Device ID', 'IP Address', 'Type', 'Location' );
 
         fputcsv($handle, $data);
+
+        fclose($handle);
 	}
 
 foreach ( $rows as $row ) {
@@ -24,12 +26,9 @@ foreach ( $rows as $row ) {
 
         fputcsv($handle, $data);
 
+        fclose($handle);
+
 	}
 }
-
-if ($handle) {
-	fclose($handle);
-}
-
 
 ?>
