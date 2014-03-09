@@ -3,7 +3,7 @@
 	include('functions.php');
 
 	if(isset($_POST['submit'])) {
-		$message = insert_device( $post, $host, $database, $username, $password );
+		$message = insert_device( $host, $database, $username, $password );
 	}
 ?>
 <!DOCTYPE HTML>

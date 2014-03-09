@@ -26,7 +26,7 @@
 
     /**
     *
-    * Returns formatted connection status of the device
+    * Returns the connection status of the device
     *
     * @param string $ip IP address of the device to ping
     *
@@ -47,7 +47,6 @@
 
         return $status;
     }
-
 
     /**
     *
@@ -74,7 +73,6 @@
             $dbh = null;
 
             return $result;
-
 
         }
         catch(PDOException $e) {
@@ -122,11 +120,11 @@
             if($stmt->execute()) {
                 // close db connection
                 $dbh = null;
-                return '<p class="success">Device added successfully!</p>';
+                return 'Device added successfully!';
             } else {
                 // close db connection
                 $dbh = null;
-                return '<p class="failure">There was an error adding the device. Please try again.</p>';
+                return 'There was an error adding the device. Please try again.';
             }
 
         }
@@ -140,17 +138,14 @@
     /**
     *
     * Updates the device information in the database
-    * @param string $ID Device ID
-    * @param string $location Device location
-    * @param string $type Device type
-    * @param string $ip_address IP Address of the device
+    *
     * @param string $host Hostname for the database
     * @param string $database Database name
     * @param string $username Username
     * @param string $password User password
     *
     */
-    function update_device( $ID, $location, $type, $ip_address, $host, $database, $username, $password ) {
+    function update_device( $host, $database, $username, $password ) {
         try {
             // open new connection
             $dbh = new PDO("mysql:host=$host;dbname=$database", $username, $password);
@@ -159,10 +154,10 @@
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // $_POST variables
-            $id = $ID;
-            $IP_address = $ip_address;
-            $device_type = $type;
-            $device_location = $location;
+            $id = $_POST['ID'];
+            $device_location = $_POST['DeviceLocation'];
+            $device_type = $_POST['Type'];
+            $IP_address = $_POST['IPAddress'];
 
             // prepare the SQL statement
             $stmt = $dbh->prepare("UPDATE devices SET ip_address=:IP_address, type=:device_type, location=:device_location WHERE ID=:id");
@@ -178,11 +173,11 @@
             if($stmt->execute()) {
                 // close db connection
                 $dbh = null;
-                echo '<p class="succcess">Device updated successfully!</p>';
+                echo 'Device updated successfully!';
             } else {
                 // close db connection
                 $dbh = null;
-                echo '<p class="failure">There was an error updating the device. Please try again.</p>';
+                echo 'There was an error updating the device. Please try again.';
             }
 
 
@@ -198,14 +193,13 @@
     *
     * Deletes the device from the database
     *
-    * @param string $ID Device ID
     * @param string $host Hostname for the database
     * @param string $database Database name
     * @param string $username Username
     * @param string $password User password
     *
     */
-    function delete_device( $ID, $host, $database, $username, $password ) {
+    function delete_device( $host, $database, $username, $password ) {
         try {
             // open new connection
             $dbh = new PDO("mysql:host=$host;dbname=$database", $username, $password);
@@ -214,7 +208,7 @@
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // $_POST variable
-            $id = $ID;
+            $id = $_POST['ID'];
 
             // prepare the SQL statement
             $stmt = $dbh->prepare("DELETE FROM devices WHERE ID=:id");
@@ -226,11 +220,11 @@
             if($stmt->execute()) {
                 // close db connection
                 $dbh = null;
-                echo '<p class="success">The device has been deleted.</p>';
+                echo 'The device has been deleted.';
             } else {
                 // close db connection
                 $dbh = null;
-                echo '<p class="failure">There was an error deleting the device. Please try again.</p>';
+                echo 'There was an error deleting the device. Please try again.';
             }
 
         }
@@ -240,6 +234,11 @@
         }
 
     }
+
+
+
+
+
 
 
 ?>
